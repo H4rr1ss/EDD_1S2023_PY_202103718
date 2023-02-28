@@ -1,6 +1,11 @@
 package packEstudiantes
 
-import "fmt"
+import (
+	"EDD_1S2023_PY_202103718/estructuras/packPila"
+	"EDD_1S2023_PY_202103718/reportes/graphviz"
+	"fmt"
+	"strconv"
+)
 
 // ESTRUCTURA DE UNA LISTA DOBLEMENTE ENLAZADA
 type ListaDoble struct {
@@ -24,7 +29,7 @@ func (l *ListaDoble) newNodo(estudiante *Estudiante) *Nodo {
 
 // PARA AGREAGAR ESTUDIANTES
 func (l *ListaDoble) AddEstudiante(nombre string, apellido string, carnet string, pass string) {
-	newEstudiante := &Estudiante{nombre, apellido, carnet, pass}
+	newEstudiante := &Estudiante{nombre, apellido, carnet, pass, &packPila.Pila{Primero: nil, Size: 0}}
 	if l.isEmpty() {
 		nuevoNodo := l.newNodo(newEstudiante)
 		l.Inicio = nuevoNodo
@@ -67,4 +72,85 @@ func (l *ListaDoble) EstudianteRepetido(nombre string) bool {
 		current = current.siguiente
 	}
 	return false
+}
+
+// INICIO DE SESION ESTUDIANTES
+func (l *ListaDoble) InicioSesion(carnet string, pass string) bool {
+	current := l.Inicio
+
+	for current != nil {
+		if carnet == current.estudiante.carnet && pass == current.estudiante.pass {
+			return true
+		}
+		current = current.siguiente
+	}
+	return false
+}
+
+func (l *ListaDoble) AddBitacoraEnListaDoble(carnet string, fecha string) {
+	current := l.Inicio
+
+	for current != nil {
+		if carnet == current.estudiante.carnet {
+			current.estudiante.pila.Push("Se inició sesión", fecha)
+		}
+		current = current.siguiente
+	}
+}
+
+func (l *ListaDoble) GraficarF() {
+	nombre_archivo := "./reportes/graphviz/listadoble.dot"
+	nombre_imagen := "reportes/listadoble.png"
+	graphviztxt := "digraph listadoble{\n"
+	graphviztxt += "node[shape = box fillcolor = \"white\" style = filled];\n"
+	graphviztxt += "subgraph cluster_l{ \n"
+	graphviztxt += "label = \"Lista de Estudiante\" \n"
+	graphviztxt += "edge[dir = \"both\" minlen = 2] \n"
+	graphviztxt += "nodon1[width = 1.2 label = \"null\" fillcolor = white] \n"
+	graphviztxt += "nodon2[width = 1.2 label = \"null\" fillcolor = white] \n"
+	current := l.Inicio
+
+	for i := 0; i < l.Size; i++ {
+		graphviztxt += "nodo" + strconv.Itoa(i) + "[width = 1.2 label=\"" + current.estudiante.carnet + "\\n" + current.estudiante.nombre + "\"]" + "\n"
+		current = current.siguiente
+	}
+	for i := 0; i < l.Size-1; i++ {
+		if i == 0 {
+			graphviztxt += "nodon1" + " -> nodo" + strconv.Itoa(i) + "\n"
+		}
+		graphviztxt += "nodo" + strconv.Itoa(i) + " -> nodo" + strconv.Itoa(i+1) + "\n"
+		if (i + 1) == l.Size-1 {
+			graphviztxt += "nodo" + strconv.Itoa(i+1) + " -> nodon2" + "\n"
+		}
+	}
+	graphviztxt += "{rank = same;nodon1;nodon2"
+	for i := 0; i < l.Size; i++ {
+		graphviztxt += ";nodo" + strconv.Itoa(i)
+	}
+	graphviztxt += "}\n"
+
+	current = l.Inicio
+	for i := 0; i < l.Size; i++ {
+		if !current.estudiante.pila.EstaVacia() {
+			graphviztxt += "pila" + strconv.Itoa(i) + current.estudiante.pila.GraficarNodo()
+			graphviztxt += "nodo" + strconv.Itoa(i) + " -> " + "pila" + strconv.Itoa(i) + "\n"
+		}
+		current = current.siguiente
+	}
+	graphviztxt += "}\n"
+	graphviztxt += "}"
+	graphviz.CrearArchivo(nombre_archivo)
+	graphviz.EscribirArchivoDot(graphviztxt, nombre_archivo)
+	graphviz.Ejecutar(nombre_imagen, nombre_archivo)
+}
+
+func (l *ListaDoble) MostrarBitacoraEstudiante(carnet string) {
+	current := l.Inicio
+
+	for current != nil {
+		if carnet == current.estudiante.carnet {
+			current.estudiante.pila.MostrarDatos()
+		}
+		current = current.siguiente
+	}
 }

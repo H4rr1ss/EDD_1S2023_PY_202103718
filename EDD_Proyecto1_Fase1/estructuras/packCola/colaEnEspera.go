@@ -49,7 +49,7 @@ func (c *Cola) MostrarPrimero() bool {
 		fmt.Println("\nLa cola no contiene elementos")
 		return true
 	}
-	fmt.Println("\nPendientes: ", c.Size)
+	fmt.Println("\n\nPendientes: ", c.Size)
 	fmt.Println("Estudiante actual: " + c.Primero.nombre + " " + c.Primero.apellido)
 	return false
 }
@@ -75,7 +75,7 @@ func (c *Cola) EstudianteRepetido(carnet string) bool {
 
 func (c *Cola) Graficar() {
 	nombre_archivo := "./reportes/graphviz/cola.dot"
-	nombre_imagen := "reportes/cola.jpg"
+	nombre_imagen := "reportes/colaDeEspera.jpg"
 	texto := "digraph cola{\n"
 	texto += "rankdir=LR;\n"
 	texto += "node[shape = record];\n"
@@ -83,7 +83,7 @@ func (c *Cola) Graficar() {
 	aux := c.Primero
 	contador := 0
 	for i := 0; i < c.Size; i++ {
-		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{" + aux.carnet + ", " + aux.nombre + " " + aux.apellido + "|}\"];\n"
+		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{" + aux.carnet + "\\n " + aux.nombre + " " + aux.apellido + "|}\"];\n"
 		aux = aux.siguiente
 	}
 	for i := 0; i < c.Size-1; i++ {

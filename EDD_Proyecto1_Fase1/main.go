@@ -9,20 +9,28 @@ func main() {
 	inicio := "\n           ********************************\n           *                              *\n           *     BIENVENIDO A GoDrive     *\n           *                              *\n           ********************************"
 	opcion := 0
 	resp := ""
+	usuario := ""
+	pass := ""
 	salir := false
 
-	fmt.Println(inicio)
-	fmt.Println("\n   1.   Iniciar sesion\n   2.   Salir del sistema\n--------------------------\nElija una opcion:")
-	fmt.Scanln(&resp)
-
-	if resp != "1" {
-		fmt.Print("\nCerrando Aplicación...\n\n")
-		return
-	}
-
 	for !salir {
-		usuario := ""
-		pass := ""
+		db.Clean()
+		opcion = 0
+		usuario = ""
+		pass = ""
+		resp = ""
+
+		fmt.Println(inicio)
+		fmt.Println("\n   1.   Iniciar sesion\n   2.   Salir del sistema\n--------------------------\nElija una opcion:")
+		fmt.Scanln(&resp)
+
+		if resp != "1" {
+			fmt.Print("\nCerrando Aplicación...\n\n")
+			return
+		}
+
+		db.Clean()
+		fmt.Println("********* INICIO DE SESIÓN < GoDrive > *********")
 		fmt.Println("\nIngresa tu usuario: ")
 		fmt.Scanln(&usuario)
 		fmt.Println("\nIngresa tu password: ")
@@ -30,12 +38,10 @@ func main() {
 
 		if usuario == "admin" && pass == "admin" {
 			opcion = 1
-			salir = true
-		} else if usuario == "hola" && pass == "hola" {
+		} else if db.InicioSesionEstudiante(usuario, pass) == "1" {
 			opcion = 2
-			salir = true
 		}
-
+		fmt.Println(opcion)
 		switch opcion {
 		case 1:
 			// MENU DE ADMINISTRADOR
@@ -43,11 +49,13 @@ func main() {
 			break
 		case 2:
 			// MENU DE ESTUDIANTES
-			estudiantesMenu()
+			db.Clean()
+			estudiantesMenu(usuario)
 			break
 		default:
 			fmt.Println("\nPOR FAVOR REVISE LOS DATOS.")
 		}
+
 	}
 }
 
@@ -60,33 +68,43 @@ func adminMenu() {
 
 	opcion := 0
 	enter := ""
-	salir := false
+	salirr := false
 
-	for !salir {
+	for !salirr {
+		db.Clean()
+		opcion = 0
 		fmt.Println(menu)
 		fmt.Print("Elige una opcion: ")
 		fmt.Scanln(&opcion)
 
 		switch opcion {
 		case 1: // VER ESTUDIANTES PENDIENTES
+			db.Clean()
+			fmt.Println("\n********* Estudiantes Pendientes < GoDrive > *********")
 			verEstudiantesPendientes()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
 			break
 
 		case 2: // VER ESTUDIANTES DEL SISTEMA
+			db.Clean()
+			fmt.Println("\n********* Listado de Estudiantes < GoDrive > *********")
 			db.ListaDeEstudiantesRegistrados()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
 			break
 
 		case 3: // REGISTRAR NUEVO ESTUDIANTE
+			db.Clean()
+			fmt.Println("\n********* Registro de Estudiantes < GoDrive > *********")
 			registrarNuevoEstudiante()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
 			break
 
-		case 4: // CARGA MASICA DE ESTUDIANTES
+		case 4: // CARGA MASIVA DE ESTUDIANTES
+			db.Clean()
+			fmt.Println("\n********* Carga Masiva de Usuarios < GoDrive > *********")
 			fmt.Println("PENDIENTE")
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
@@ -94,7 +112,8 @@ func adminMenu() {
 
 		case 5: // CERRAR SESION
 			fmt.Println("\nCerrando Aplicación...")
-			salir = true
+			salirr = true
+			break
 		}
 	}
 }
@@ -109,11 +128,11 @@ func registrarNuevoEstudiante() {
 
 	fmt.Println("\nIngrese un nombre")
 	fmt.Scanln(&nombre)
-	fmt.Println("Ingrese un apellido")
+	fmt.Println("\nIngrese un apellido")
 	fmt.Scanln(&apellido)
-	fmt.Println("Ingrese el carnet")
+	fmt.Println("\nIngrese el carnet")
 	fmt.Scanln(&carnet)
-	fmt.Println("Ingrese una contraseña")
+	fmt.Println("\nIngrese una contraseña")
 	fmt.Scanln(&pass)
 
 	if !db.AgregarEstudiante(nombre, apellido, carnet, pass) {
@@ -130,11 +149,12 @@ func verEstudiantesPendientes() {
 	opcion := 0
 
 	for !salir {
+		opcion = 0
 		if db.ReturnPrimerEstudiante() == "1" {
 			return
 		}
 
-		fmt.Println("\nElija una opcion:\n 1. Aprobar estudiante\n 2. Rechazar estudiante\n 3. Volver a menú principal\n---------------------------")
+		fmt.Println("\nElija una opcion:\n   1. Aprobar estudiante\n   2. Rechazar estudiante\n   3. Volver a menú principal\n---------------------------")
 		fmt.Scanln(&opcion)
 
 		switch opcion {
@@ -143,7 +163,8 @@ func verEstudiantesPendientes() {
 			fmt.Println("\nEstudiante aprobado.")
 			break
 		case 2:
-			fmt.Println("2")
+			db.RechazarEstudiante()
+			fmt.Println("\nEstudiante rechazado.")
 			break
 		case 3:
 			fmt.Println("\n Regresando al menú principal...")
@@ -154,6 +175,14 @@ func verEstudiantesPendientes() {
 }
 
 // -------------------------------------------------------ESTUDIANTE-------------------------------------------------------
-func estudiantesMenu() {
-	fmt.Println("MENU DE ESTUDIANTES")
+func estudiantesMenu(carnet string) {
+	enter := ""
+	fmt.Println("\n********* Bitacora de Usuario < GoDrive > *********")
+	fmt.Println("\nEstas son sus bitacoras:")
+	fmt.Println("\n------------------------------------")
+	db.BitacoraEstudiante(carnet)
+	fmt.Println("\n------------------------------------")
+	fmt.Println("\n\n > Se generó una imagen de la bitacora del estudiante.")
+	fmt.Println("\n\n    < Presione enter para regresar >")
+	fmt.Scanln(&enter)
 }

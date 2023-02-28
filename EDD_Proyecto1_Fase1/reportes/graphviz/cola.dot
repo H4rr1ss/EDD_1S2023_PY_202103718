@@ -2,10 +2,14 @@ digraph cola{
 rankdir=LR;
 node[shape = record];
 nodonull2[label="null"];
-nodo0[label="{202103711, Jhon Sanic|}"];
 nodo0->nodonull2;
-}03711, Jhon Sanic|}"];
+}3717\n ronald gomez|}"];
+nodo0->nodonull2;
+}03717\n ronald gomez|}"];
 nodo0->nodo1;
 nodo1->nodonull2;
-};
+}omez|}"];
+nodo0->nodo1;
+nodo1->nodo2;
+nodo2->nodonull2;
 }

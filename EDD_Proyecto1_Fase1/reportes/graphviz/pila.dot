@@ -1,0 +1,5 @@
+digraph pila{
+rankdir=LR;
+node[shape = record]nodo0 [label="|Se aceptó a ronald, \n27 February 2023 23:46:59|Se aceptó a maia, \n27 February 2023 23:46:58|Se aceptó a harry, \n27 February 2023 23:46:58"]; 
+}10:43:35)"]; 
+}
