@@ -69,10 +69,16 @@ func AprobarEstudiante() {
 	nombre, apellido, carnet, pass := colaDeEspera.RetunPrimero()
 	listaEstudiantes.AddEstudiante(nombre, apellido, carnet, pass)
 	pilaAdmin.Push("Se aceptó a "+nombre+", ", formato_hora())
+
 	pilaAdmin.Graficar()
 	listaEstudiantes.GraficarF()
 	colaDeEspera.Descolar()
 	colaDeEspera.Graficar()
+
+	contenido := listaEstudiantes.CrearJson()
+	packEstudiantes.CrearArchivo()
+	packEstudiantes.EscribirArchivo(contenido)
+	listaEstudiantes.MostrarLista()
 }
 
 func RechazarEstudiante() {

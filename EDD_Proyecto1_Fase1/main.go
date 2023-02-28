@@ -46,12 +46,12 @@ func main() {
 		case 1:
 			// MENU DE ADMINISTRADOR
 			adminMenu()
-			break
+
 		case 2:
 			// MENU DE ESTUDIANTES
 			db.Clean()
 			estudiantesMenu(usuario)
-			break
+
 		default:
 			fmt.Println("\nPOR FAVOR REVISE LOS DATOS.")
 		}
@@ -65,13 +65,17 @@ func adminMenu() {
 		"      2. Ver Estudiantes del Sistema       *\n*      3. Registrar Nuevo Estudiante 	    *\n*      4. Carga Masiva de Estudiantes	    *\n" +
 		"*      5. Cerrar Sesion 	            *\n*********************************************"
 	// MINUS PRIVADO, MAYUS PUBLICO
-
+	nombreArchivo := ""
 	opcion := 0
 	enter := ""
+	final := ""
 	salirr := false
 
 	for !salirr {
+		salirr = false
+		final = ""
 		db.Clean()
+		nombreArchivo = ""
 		opcion = 0
 		fmt.Println(menu)
 		fmt.Print("Elige una opcion: ")
@@ -84,7 +88,6 @@ func adminMenu() {
 			verEstudiantesPendientes()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
-			break
 
 		case 2: // VER ESTUDIANTES DEL SISTEMA
 			db.Clean()
@@ -92,7 +95,6 @@ func adminMenu() {
 			db.ListaDeEstudiantesRegistrados()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
-			break
 
 		case 3: // REGISTRAR NUEVO ESTUDIANTE
 			db.Clean()
@@ -100,20 +102,22 @@ func adminMenu() {
 			registrarNuevoEstudiante()
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
-			break
 
 		case 4: // CARGA MASIVA DE ESTUDIANTES
 			db.Clean()
 			fmt.Println("\n********* Carga Masiva de Usuarios < GoDrive > *********")
-			fmt.Println("PENDIENTE")
+			fmt.Println("\nPor favor, ingrese el nombre del archivo")
+			fmt.Scanln(&nombreArchivo)
+			final = "./archivosPrueba/" + nombreArchivo + ".csv"
+			fmt.Println("\nCargando todos los Estudiantes a la base de datos...")
+			db.LeerArchivo(final)
+
 			fmt.Println("\n\n    < Presione enter para regresar >")
 			fmt.Scanln(&enter)
-			break
 
 		case 5: // CERRAR SESION
 			fmt.Println("\nCerrando Aplicación...")
 			salirr = true
-			break
 		}
 	}
 }
@@ -161,15 +165,15 @@ func verEstudiantesPendientes() {
 		case 1:
 			db.AprobarEstudiante()
 			fmt.Println("\nEstudiante aprobado.")
-			break
+
 		case 2:
 			db.RechazarEstudiante()
 			fmt.Println("\nEstudiante rechazado.")
-			break
+
 		case 3:
 			fmt.Println("\n Regresando al menú principal...")
 			salir = true
-			break
+
 		}
 	}
 }
@@ -177,8 +181,7 @@ func verEstudiantesPendientes() {
 // -------------------------------------------------------ESTUDIANTE-------------------------------------------------------
 func estudiantesMenu(carnet string) {
 	enter := ""
-	fmt.Println("\n********* Bitacora de Usuario < GoDrive > *********")
-	fmt.Println("\nEstas son sus bitacoras:")
+	fmt.Println("\n********* Bitacora de Usuario < GoDrive > *********\nEstas son sus bitacoras:")
 	fmt.Println("\n------------------------------------")
 	db.BitacoraEstudiante(carnet)
 	fmt.Println("\n------------------------------------")

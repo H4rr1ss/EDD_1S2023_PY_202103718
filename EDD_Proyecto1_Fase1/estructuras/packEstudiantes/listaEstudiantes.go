@@ -17,6 +17,7 @@ type ListaDoble struct {
 // FUNCIONES PARA VERIFICAR SI ESTA VACIA LA LISTA
 func (l *ListaDoble) isEmpty() bool {
 	if l.Size == 0 {
+		fmt.Println(" ")
 		return true
 	}
 	return false
@@ -60,6 +61,47 @@ func (l *ListaDoble) MostrarLista() {
 		fmt.Println("*****************************************")
 		current = current.siguiente
 	}
+}
+
+func (l *ListaDoble) CrearJson() string {
+	txt := "{\n"
+	txt += "\t\"alumnos\": [\n"
+	current := l.Inicio
+
+	if l.Size == 1 {
+		txt += "\t \t{\n"
+		txt += "\t \t \t\"nombre\": \"" + current.estudiante.nombre + " " + current.estudiante.apellido + "\",\n"
+		txt += "\t \t \t\"carnet\": " + current.estudiante.carnet + ",\n"
+		txt += "\t \t \t\"password\": \"" + current.estudiante.pass + "\",\n"
+		txt += "\t \t \t\"Carpeta_Raiz\": \"/\"\n"
+		txt += "\t \t }\n"
+		txt += "\t]\n"
+		txt += "}"
+
+		return txt
+	}
+
+	for current != nil {
+
+		txt += "\t \t{\n"
+		txt += "\t \t \t\"nombre\": \"" + current.estudiante.nombre + " " + current.estudiante.apellido + "\",\n"
+		txt += "\t \t \t\"carnet\": " + current.estudiante.carnet + ",\n"
+		txt += "\t \t \t\"password\": \"" + current.estudiante.pass + "\",\n"
+		txt += "\t \t \t\"Carpeta_Raiz\": \"/\"\n"
+
+		if current.siguiente == nil {
+			txt += "\t \t }\n"
+			break
+		}
+		txt += "\t \t },\n"
+
+		current = current.siguiente
+	}
+
+	txt += "\t]\n"
+	txt += "}"
+
+	return txt
 }
 
 // VERIFICAR SI SE REPITE UN ESTUDIANTE

@@ -1,6 +1,7 @@
-# MANUAL TÉCNICO :school_satchel:
+# MANUAL TÉCNICO 💻
 
-## Descripción de la solución
+
+## Descripción de la solución ⚙️ 
 
 #### ***archivosPrueba***:
 Acá se almacenan todos los archivos para la prueba del programa, en este caso para la carga masiva de archivos
@@ -12,11 +13,20 @@ Para la solución se utilizó una base de datos en la cual se hace el manejo de 
 En este apartado se encuentran todas las estructuras utilizadas como: ListaDoblemente Enlazada, Pila, Cola, etc.
 
 #### ***reportes***:
-Esta sección se encuentra todo lo relacionado con la información representada de forma grafica, con su respectivo archivo de generación .dot
+Esta sección se encuentra todo lo relacionado con la información representada de forma grafica, con su respectivo archivo de generación .dot así como el archivo JSON de estudiante.
 
 ___
 
-## db[métodos]
+## Requerimientos del Entorno de Desarrollo 🔧
+* Versión de Go: go1.20
+
+* IDE utilizada: Visual Studio Code 1.56.0
+
+* Espacio en memoria: 100 MB como mínimo
+
+___
+
+## db[métodos] 📖
 Estas son algunas de las funciones más importantes usadas en la base de datos de programa.
 
 | Función                       |   Definición  |
@@ -28,7 +38,7 @@ Estas son algunas de las funciones más importantes usadas en la base de datos d
 | `RechazarEstudiante`            | sacá de la cola de espera a este estudiante      |
 | `ListaDeEstudiantesRegistrados` | ingresa a los estudiantes aceptados por el administrador      |
 
-## estructuras[tipos]
+## estructuras[tipos] 📖
 Estas son las estructuras utilizadas para la realización de la primera fase.
 
 | Estructura  | Definición |
@@ -39,14 +49,17 @@ Estas son las estructuras utilizadas para la realización de la primera fase.
 | `PilaEstudiante`    | registra todos los inicios de sesión en el sistema      |
 
 ___
-## imports
+## imports 📦
 Todas las importaciones utilizadas a lo largo de todo el proceso de realización de la Fase 1
 ~~~
 	"fmt"
 	"os"
+	"io"
 	"os/exec"
 	"strconv"
 	"time"
+	"strings"
+	"encoding/csv"
 ~~~
 
 ~~~

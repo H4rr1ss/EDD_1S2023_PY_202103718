@@ -5,15 +5,29 @@ label = "Lista de Estudiante"
 edge[dir = "both" minlen = 2] 
 nodon1[width = 1.2 label = "null" fillcolor = white] 
 nodon2[width = 1.2 label = "null" fillcolor = white] 
-nodo0[width = 1.2 label="202103718\nharry"]
-nodo1[width = 1.2 label="202103719\nmaia"]
-nodo2[width = 1.2 label="202103717\nronald"]
+nodo0[width = 1.2 label="201700918\nCristian"]
+nodo1[width = 1.2 label="201780044\nLeonardo"]
+nodo2[width = 1.2 label="201403877\nEbany"]
+nodo3[width = 1.2 label="201902259\nLourdes"]
+nodo4[width = 1.2 label="201903549\nAlejandro"]
+nodo5[width = 1.2 label="201900570\nJonatan"]
+nodo6[width = 1.2 label="201700653\nKevyn"]
+nodo7[width = 1.2 label="202004703\nEduardo"]
+nodo8[width = 1.2 label="202000544\nRoberto"]
+nodo9[width = 1.2 label="202002940\nSebasti醤"]
+nodo10[width = 1.2 label="201801683\nJuan"]
 nodon1 -> nodo0
 nodo0 -> nodo1
 nodo1 -> nodo2
-nodo2 -> nodon2
-{rank = same;nodon1;nodon2;nodo0;nodo1;nodo2}
-pila1[fontsize = 8 shape = record fillcolor = white label = "{pila|Se inici贸 sesi贸n\n27 February 2023 23:47:30|Se inici贸 sesi贸n\n27 February 2023 23:47:10}"]
-nodo1 -> pila1
+nodo2 -> nodo3
+nodo3 -> nodo4
+nodo4 -> nodo5
+nodo5 -> nodo6
+nodo6 -> nodo7
+nodo7 -> nodo8
+nodo8 -> nodo9
+nodo9 -> nodo10
+nodo10 -> nodon2
+{rank = same;nodon1;nodon2;nodo0;nodo1;nodo2;nodo3;nodo4;nodo5;nodo6;nodo7;nodo8;nodo9;nodo10}
 }
 }

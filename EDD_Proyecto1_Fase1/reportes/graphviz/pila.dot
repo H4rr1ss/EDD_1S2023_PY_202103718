@@ -1,5 +1,4 @@
 digraph pila{
 rankdir=LR;
-node[shape = record]nodo0 [label="|Se aceptó a ronald, \n27 February 2023 23:46:59|Se aceptó a maia, \n27 February 2023 23:46:58|Se aceptó a harry, \n27 February 2023 23:46:58"]; 
-}10:43:35)"]; 
+node[shape = record]nodo0 [label="|Se aceptó a Juan, \n28 February 2023 17:01:58|Se aceptó a Sebasti�n, \n28 February 2023 17:01:57|Se aceptó a Roberto, \n28 February 2023 17:01:55|Se aceptó a Eduardo, \n28 February 2023 17:01:53|Se aceptó a Kevyn, \n28 February 2023 17:01:51|Se aceptó a Jonatan, \n28 February 2023 17:01:48|Se aceptó a Alejandro, \n28 February 2023 17:01:44|Se aceptó a Lourdes, \n28 February 2023 17:01:42|Se aceptó a Ebany, \n28 February 2023 17:01:32|Se aceptó a Leonardo, \n28 February 2023 17:01:24|Se aceptó a Cristian, \n28 February 2023 17:01:13"]; 
 }
