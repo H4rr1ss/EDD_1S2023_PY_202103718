@@ -1,0 +1,22 @@
+{
+	"alumnos": [
+	 	{
+	 	 	"nombre": "harry gomez",
+	 	 	"carnet": 202103718,
+	 	 	"password": "harry",
+	 	 	"Carpeta_Raiz": "/"
+	 	 },
+	 	{
+	 	 	"nombre": "maia alvarado",
+	 	 	"carnet": 202103719,
+	 	 	"password": "maia",
+	 	 	"Carpeta_Raiz": "/"
+	 	 },
+	 	{
+	 	 	"nombre": "Leonardo Martinez",
+	 	 	"carnet": 201780044,
+	 	 	"password": "leo123",
+	 	 	"Carpeta_Raiz": "/"
+	 	 }
+	]
+}
