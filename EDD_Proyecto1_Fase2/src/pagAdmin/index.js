@@ -53,8 +53,37 @@ function processFiles(file){
 
     if(validExtension.includes(docType)){
 
+        const fileReader = new FileReader();
 
+        fileReader.addEventListener("load", e =>{
+            const fileURL = fileReader.result;
+        });
+
+        fileReader.readAsDataURL(file);
+        uploadFile
     }else{
         alert("No es un archivo válido");
+    }
+}
+
+function uploadFile(file){
+    const formData = new FormData();
+    formData.append("file", file);
+
+}
+
+const inputElement = document.getElementById("input-file");
+inputElement.addEventListener("cahnge", onchange, false)
+function onchange(event){
+    var reader = new FileReader();
+    reader.onload = onReaderLoad
+    reader.readAsText(event.target.files[0])
+}
+
+function onReaderLoad(event){
+    var obj = JSON.parse(event.target.result);
+
+    for(var i = 0; obj.alumnos.length; i++){
+        console.log(obj.alumnos[i].nombre);
     }
 }
