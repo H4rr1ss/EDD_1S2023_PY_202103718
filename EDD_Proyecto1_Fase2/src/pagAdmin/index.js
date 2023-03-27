@@ -30,6 +30,8 @@ dropArea.addEventListener("dragleave", (e) =>{
 
 dropArea.addEventListener("drop", (e) =>{
     e.preventDefault();
+    files = e.dataTransfer.files;
+    showFiles(files);
     dropArea.classList.remove("active"); 
     dragText.textContent = "Arrastre y suelte los archivos aquí para subirlos";
 });
@@ -46,5 +48,13 @@ function showFiles(files){
 }
 
 function processFiles(file){
+    const docType = file.type;
+    const validExtension = ["application/json"];
 
+    if(validExtension.includes(docType)){
+
+
+    }else{
+        alert("No es un archivo válido");
+    }
 }
