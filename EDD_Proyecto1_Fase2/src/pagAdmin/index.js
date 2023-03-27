@@ -38,13 +38,14 @@ dropArea.addEventListener("drop", (e) =>{
 
 
 function showFiles(files){
-    if(files.length == undefined){
-        processFiles(files);
+    processFiles(files);
+    /*if(files.length == undefined){
+        
     }else{
         for(const file of files){
             processFiles(file);
         }
-    }
+    }*/
 }
 
 function processFiles(file){
