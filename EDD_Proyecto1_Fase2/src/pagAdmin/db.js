@@ -13,6 +13,5 @@ export class DataBase{
     }
 }
 
-
-
-export default DataBase
+export const DB = DataBase()
+export default DB
