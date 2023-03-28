@@ -1,7 +1,7 @@
 /* IMPORTACIONES DE ESTRUCTURAS */
 
 
-class DataBase{
+export class DataBase{
     constructor(){
         /* ACÁ SE INSTANCIARAN TODAS LAS ESTRUCTURAS A UTILIZAR */
         this.nombre = "harry"
