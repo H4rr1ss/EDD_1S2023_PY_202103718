@@ -1,7 +1,7 @@
 /* IMPORTACIONES DE ESTRUCTURAS */
 
 
-export class DataBase{
+class DataBase{
     constructor(){
         /* ACÁ SE INSTANCIARAN TODAS LAS ESTRUCTURAS A UTILIZAR */
         this.nombre = "harry"
@@ -13,5 +13,6 @@ export class DataBase{
     }
 }
 
-export const DB = DataBase()
+export const DB = new DataBase()
+
 export default DB
