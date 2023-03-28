@@ -49,7 +49,7 @@ function showFiles(files){
     }*/
 }
 
-DB.holaPrueba
+DB.holaPrueba()
 
 
 const inputElement = document.getElementById("input-file");
