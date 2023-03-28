@@ -1,3 +1,5 @@
+import {DataBase as DB} from "./db.js"
+
 const dropArea = document.querySelector(".drag-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -38,7 +40,6 @@ dropArea.addEventListener("drop", (e) =>{
 
 
 function showFiles(files){
-    processFiles(files);
     /*if(files.length == undefined){
         
     }else{
@@ -48,29 +49,24 @@ function showFiles(files){
     }*/
 }
 
-function processFiles(file){
-    const docType = file.type;
-    const validExtension = ["application/json"];
 
-    if(validExtension.includes(docType)){
 
-        const inputElement = document.getElementById("input-file");
-        inputElement.addEventListener("cahnge", onchange, false);
-        function onchange(event){
-        var reader = new FileReader();
-        reader.onload = onReaderLoad;
-        reader.readAsText(event.target.files[0]);
-        }   
-        console.log("SI PASE");
-    }else{
-        alert("No es un archivo válido");
-    }
-}
+
+
+const inputElement = document.getElementById("input-file");
+inputElement.addEventListener("change", onchange, false);
+function onchange(event){
+var reader = new FileReader();
+reader.onload = onReaderLoad;
+reader.readAsText(event.target.files[0]);
+}   
 
 function onReaderLoad(event){
     var obj = JSON.parse(event.target.result);
 
-    for(var i = 0; obj.alumnos.length; i++){
+    for(var i = 0; i<obj.alumnos.length; i++){
+        /* ACÁ SE INGRESARAN LOS DATOS AL ARBOL AVL */ 
         console.log(obj.alumnos[i].nombre);
     }
+    DB.nombre()
 }
