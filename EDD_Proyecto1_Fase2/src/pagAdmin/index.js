@@ -1,4 +1,4 @@
-import {DataBase as DB} from "./db.js"
+import DB from "./db.js"
 
 const dropArea = document.querySelector(".drag-area");
 const dragText = dropArea.querySelector("h2");
@@ -68,5 +68,5 @@ function onReaderLoad(event){
         /* ACÁ SE INGRESARAN LOS DATOS AL ARBOL AVL */ 
         console.log(obj.alumnos[i].nombre);
     }
-    DB.nombre()
+    //DB.nombre()
 }

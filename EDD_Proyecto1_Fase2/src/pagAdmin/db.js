@@ -13,4 +13,6 @@ export class DataBase{
     }
 }
 
-DB = DataBase()
+
+
+export default DataBase
