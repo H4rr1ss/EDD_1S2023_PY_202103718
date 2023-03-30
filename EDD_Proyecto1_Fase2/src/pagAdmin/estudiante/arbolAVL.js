@@ -1,14 +1,37 @@
-class nodoArbol{
-    constructor(entrada){
+class Estudiante{
+    constructor(carnet){
+        this.nombre = "";
+        this.carnet = carnet;
+        this.password = "";
+
         this.izq = null;
         this.der = null;
-        this.entrada = entrada;
         this.altura = 1;
         this.f_equilibrio = 0;
     }
+
+    get getNombre(){
+        return this.nombre
+    }
+
+    get getPassword(){
+        return this.password
+    }
+
+    get getCarnet(){
+        return this.carnet
+    }
+
+    set setNombre(name){
+        this.nombre = name
+    }
+
+    set setPassword(pass){
+        this.password = pass
+    }
 }
 
-class Arbol_avl{
+export default class Arbol_avl{
     constructor(){
         this.raiz = null;
     }
@@ -45,47 +68,47 @@ class Arbol_avl{
         raiz_izq.altura = 1 + Math.max(this.Altura(raiz_izq.izq), this.Altura(raiz_izq.der))
         raiz.f_equilibrio =  this.Equilibrio(raiz)
         raiz_izq.f_equilibrio = this.Equilibrio(raiz_izq)
-
+        
         return raiz_izq
     }
 
-    insertar(nodo, raiz){
+    insertarValorHijo(nodo, raiz){
         if(raiz == null){
             raiz = nodo;
         }else{
-            if(raiz.entrada == nodo.entrada){
-                raiz.entrada = nodo.entrada
+            if(raiz.carnet == nodo.carnet){
+                raiz.carnet = nodo.carnet
 
-            }else if(raiz.entrada < nodo.entrada){
-                raiz.der = this.insertar(nodo, raiz.der)
+            }else if(raiz.carnet < nodo.carnet){
+                raiz.der = this.insertarValorHijo(nodo, raiz.der)
 
             }else{
-                raiz.izq = this.insertar(nodo, raiz.izq)
+                raiz.izq = this.insertarValorHijo(nodo, raiz.izq)
             }
         }
 
         raiz.altura = 1 + Math.max(this.Altura(raiz.izq), this.Altura(raiz.der))
-        let balanceo = thos.Equilibrio(raiz)
+        let balanceo = this.Equilibrio(raiz)
         raiz.f_equilibrio = balanceo
 
         /* ROTACION SIMPLE A LA IZQUIERDA */
-        if(balanceo > 1 && nodo.entrada > raiz.der.entrada){
+        if(balanceo > 1 && nodo.carnet > raiz.der.carnet){
             return this.RotacionI(raiz)
         }
 
         /* ROTACION SIMPLE A LA DERECHA */
-        if(balanceo < -1 && nodo.entrada < raiz.izq.entrada){
+        if(balanceo < -1 && nodo.carnet < raiz.izq.carnet){
             return this.RotacionD(raiz)
         }
 
         /* ROTACION DOBLE A LA IZQUIERDA */
-        if(balanceo > 1 && nodo.entrada < raiz.der.entrada){
+        if(balanceo > 1 && nodo.carnet < raiz.der.carnet){
             raiz.der = this.RotacionD(raiz.der)
             return this.RotacionI(raiz)
         }
 
         /* ROTACION DOBLE A LA DERECHA */
-        if(balanceo < -1 && nodo.entrada > raiz.izq.entrada){
+        if(balanceo < -1 && nodo.carnet > raiz.izq.carnet){
             raiz.izq = this.RotacionI(raiz.izq)
             return this.RotacionD(raiz)
         }
@@ -93,68 +116,105 @@ class Arbol_avl{
         return raiz
     }
 
-    insertar(val){
-        const newNodo = new nodoArbol(val);
-        this.raiz = this.insertar(newNodo, this.raiz);
+    push(carnet, nombre, password){
+        const newNodo = new Estudiante(carnet);
+        newNodo.setNombre = nombre;
+        newNodo.setPassword = password;
+        this.raiz = this.insertarValorHijo(newNodo, this.raiz);
+        console.log(newNodo.getNombre+" "+newNodo.getPassword+" "+newNodo.getCarnet)
     }
+
+    returnRaiz(){
+        console.log(this.recorridoPostOrden(this.raiz)) 
+    }
+
+    returnRaizObj(){
+        console.log("pepinillo")
+        return this.raiz
+    }
+
+
+    recorridoPostOrden(raiz){
+        var cadena = ""
+
+        if(raiz !== null){
+
+            if(raiz.izq !== null){
+                cadena += this.recorridoPostOrden(raiz.izq)
+                
+            }
+            
+            if(raiz.der !== null){
+                cadena += this.recorridoPostOrden(raiz.der)
+                
+            }
+            cadena += "<tr>\n"
+            cadena += "\t<td>\""+raiz.carnet+"\"</td>\n"
+            cadena += "\t<td>\""+raiz.nombre+"\"</td>\n"
+            cadena += "</tr>\n\n"
+        }
+        
+        return cadena
+    }
+
 
 
     grafica_arbol(){
         var graphviz = "";
         if(!(this.raiz === null)){
             graphviz = "digraph arbol{ ";
-            graphviz = graphviz + this.retornarentradaesArbol(this.raiz, 0);
+            graphviz = graphviz + this.retornarcarnetesArbol(this.raiz, 0);
             graphviz = graphviz + "}";
         }else{
-            graphviz = "No hay entradaes en el arbol";
+            graphviz = "No hay carnetes en el arbol";
         }
         return graphviz;
     }
 
-    returnEntradasArbol(raiz, id){
+    returncarnetsArbol(raiz, id){
         var graphviz = "";
         var numero = id + 1;
 
         if(!(raiz === null)){
             graphviz += "\"";
-            graphviz += raiz.entrada;
+            graphviz += raiz.carnet;
             graphviz += "\" ;";
 
             if(!(raiz.izq === null) && !(raiz.der === null)){
                 graphviz += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 graphviz += "\"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
-                graphviz += this.returnEntradasArbol(raiz.izq, numero)
+                graphviz += this.returncarnetsArbol(raiz.izq, numero)
                 graphviz += "\"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
-                graphviz += this.returnEntradasArbol(raiz.der, numero)
-                graphviz += "{rank=same" + "\"" + raiz.izq.entrada + "\"" + " -> " + "\"" + raiz.der.entrada + "\""  + " [style=invis]}; "
+                graphviz += this.returncarnetsArbol(raiz.der, numero)
+                graphviz += "{rank=same" + "\"" + raiz.izq.carnet + "\"" + " -> " + "\"" + raiz.der.carnet + "\""  + " [style=invis]}; "
 
             }else if(!(raiz.izq === null) && (raiz.der === null)){
                 graphviz += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 graphviz += "\"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
-                graphviz += this.returnEntradasArbol(raiz.izq, numero)
+                graphviz += this.returncarnetsArbol(raiz.izq, numero)
                 graphviz += "\"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
                 graphviz += "x" + numero + "[style=invis]";
-                graphviz += "{rank=same" + "\"" + raiz.izq.entrada + "\"" + " -> " + "x" + numero + " [style=invis]}; "
+                graphviz += "{rank=same" + "\"" + raiz.izq.carnet + "\"" + " -> " + "x" + numero + " [style=invis]}; "
 
             }else if((raiz.izq === null) && !(raiz.der === null)){
                 graphviz += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 graphviz += "\"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
                 graphviz += "x" + numero + "[style=invis]";
                 graphviz += "; \"";
-                graphviz += raiz.entrada;
+                graphviz += raiz.carnet;
                 graphviz += "\" -> ";
-                graphviz += this.returnEntradasArbol(raiz.der, numero)
-                graphviz += "{rank=same" + " x" + numero + " -> \"" + raiz.der.entrada + "\"" +  " [style=invis]}; "
+                graphviz += this.returncarnetsArbol(raiz.der, numero)
+                graphviz += "{rank=same" + " x" + numero + " -> \"" + raiz.der.carnet + "\"" +  " [style=invis]}; "
             }
         }
         return graphviz;

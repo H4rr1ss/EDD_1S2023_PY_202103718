@@ -1,0 +1,42 @@
+/*----- GENERAL STYLE -----*/
+a{
+    color: inherit;
+}
+
+/*----- SECTIONS -----*/
+/*----- NAV -----*/
+.navbar-brand > img{
+    width: 50px;
+
+}
+
+.header-main{
+    min-height: 100vh;
+}
+
+#texto-descripcion{
+    color: #CEC3D5;
+    text-align: center;
+}
+
+
+#contenedor{
+    margin-left: 10vh;
+    width: 1200px;
+    
+}
+
+/* CONTENEDOR DE BOTONES */
+#btns{
+    margin-top: 100px;
+    border-radius: 10px;
+}
+
+#btn_alumno{
+    margin-inline: 50px;
+}
+
+#tabla{
+    width: 500px;
+    text-align: center;
+}

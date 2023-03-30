@@ -1,21 +1,21 @@
 {
 	"alumnos": [
 	 	{
-	 	 	"nombre": "harry gomez",
-	 	 	"carnet": 202103718,
-	 	 	"password": "harry",
+	 	 	"nombre": "Eminem",
+	 	 	"carnet": 203728394,
+	 	 	"password": "3hd84f",
 	 	 	"Carpeta_Raiz": "/"
 	 	 },
 	 	{
-	 	 	"nombre": "maia alvarado",
-	 	 	"carnet": 202103719,
-	 	 	"password": "maia",
+	 	 	"nombre": "Leo Messi",
+	 	 	"carnet": 203392928,
+	 	 	"password": "d4ig49g",
 	 	 	"Carpeta_Raiz": "/"
 	 	 },
 	 	{
 	 	 	"nombre": "Leonardo Martinez",
 	 	 	"carnet": 201780044,
-	 	 	"password": "leo123",
+	 	 	"password": "skflj934",
 	 	 	"Carpeta_Raiz": "/"
 	 	 }
 	]

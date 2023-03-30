@@ -18,8 +18,8 @@
             
             <div class="container">
 
-                <a href="#" class="navbar-brand">
-                    <img src="./img/inicio.png" alt="Brand Gina Admas">
+                <a href="/EDD_Proyecto1_Fase2/src/pagAdmin/admin.html" class="navbar-brand">
+                    <img src="./img/inicio.png">
                 </a>
     
                 <button class="navbar-toggler" data-vs-toggle = "collapse" data-vs-target = "#mainNav" aria-controls="mainNav"
@@ -30,9 +30,9 @@
                 <div class="collapse navbar-collapse" id="mainNav">
                     <div class="nav ms-auto text-dark">
 
-                        <a href="#mostStudents" class="nav-link">Mostrar Alumnos</a>
-                        <a href="#reportTree" class="nav-link">Reporte árbol</a>
-                        <a href="#close" class="nav-link">Cerrar sesión</a>
+                        <a href="./estudiante/mostrarEstudiante.html" class="nav-link" id="btnMS">Mostrar Alumnos</a>
+                        <a href="/EDD_Proyecto1_Fase2/src/pagAdmin/arbolEstudiante/arbolEstudiante.html" class="nav-link" id="btnRA">Reporte árbol</a>
+                        <a href="/EDD_Proyecto1_Fase2/src/index.html" class="nav-link" id="btnC">Cerrar sesión</a>
                         
                     </div>
                 </div>
@@ -59,11 +59,11 @@
                         <h2>Arrastre y suelte los archivos aquí para subirlos</h2>
                         <span>O</span>
                         <button>Seleccione sus archivos</button>
-                        <input type="file" name="" id="input-file" hidden multiple />
+                        <input type="file" name="" id="input-file" multiple />
                     </div>
                     
                     <div id="preview"></div>
-                    <script src="./index.js" type = "module"></script>
+                    
                 </div>
 
                 <!-- #region DESCRIPCION BREVE DE LA PÁGINA-->
@@ -74,7 +74,8 @@
             </header>
         </div>
 
-        
+        <!-- #region SCRIPTS-->
+        <script src="./index_admin.js" type = "module"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     </body>
