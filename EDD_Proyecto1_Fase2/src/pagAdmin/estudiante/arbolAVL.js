@@ -149,22 +149,104 @@ export default class Arbol_avl{
                 
             }
             cadena += "<tr>\n"
-            cadena += "\t<td>\""+raiz.carnet+"\"</td>\n"
-            cadena += "\t<td>\""+raiz.nombre+"\"</td>\n"
+            cadena += "\t<td>"+raiz.carnet+"</td>\n"
+            cadena += "\t<td>"+raiz.nombre+"</td>\n"
             cadena += "</tr>\n\n"
         }
         
         return cadena
     }
 
+    recorridoPreorden(raiz){
+        var cadena = ""
+        if(raiz !== null){
+
+            cadena += "<tr>\n"
+            cadena += "<td>"+raiz.carnet+"</td>\n"
+            cadena += "<td>"+raiz.nombre+"</td>\n"
+            cadena += "</tr>\n\n"
+
+            if(raiz.izq !== null){
+                cadena = cadena + this.recorridoPreorden(raiz.izq)
+            }
+            if(raiz.der !== null){
+                cadena = cadena + this.recorridoPreorden(raiz.der)
+            }
+        }
+        return cadena
+    }
+
+    recorridoInorden(raiz){
+        var cadena = ""
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                cadena += this.recorridoInorden(raiz.izq)
+            }
+
+            cadena += "<tr>\n"
+            cadena += "\t<td>"+raiz.carnet+"</td>\n"
+            cadena += "\t<td>"+raiz.nombre+"</td>\n"
+            cadena += "</tr>\n"
+
+            if(raiz.der !== null){
+                cadena += this.recorridoInorden(raiz.der)
+            }
+        }
+        return cadena
+    }
+
+    retornarValoresArbol(raiz, id){
+        var cadena = "";
+        var numero = id + 1;
+        if(raiz !== null){
+            cadena += "\"";
+            cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+            cadena += "\" ;";
+            if(!(raiz.izq === null) && !(raiz.der === null)){
+                cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
+                cadena += "\"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += this.retornarValoresArbol(raiz.izq, numero)
+                cadena += "\"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += this.retornarValoresArbol(raiz.der, numero)
+                cadena += "{rank=same" + "\"" + raiz.izq.carnet+"\\n"+raiz.izq.nombre +"\\nAltura: "+raiz.izq.altura+ "\"" + " -> " + "\"" + raiz.der.carnet +"\\n"+raiz.der.nombre+ "\\nAltura: "+raiz.der.altura+"\""  + " [style=invis]}; "
+            }else if(!(raiz.izq === null) && (raiz.der === null)){
+                cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
+                cadena += "\"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += this.retornarValoresArbol(raiz.izq, numero)
+                cadena += "\"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += "x" + numero + "[style=invis]";
+                cadena += "{rank=same" + "\"" + raiz.izq.carnet+"\\n"+raiz.izq.nombre +"\\nAltura: "+raiz.izq.altura+ "\"" + " -> " + "x" + numero + " [style=invis]}; "
+            }else if((raiz.izq === null) && !(raiz.der === null)){
+                cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
+                cadena += "\"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += "x" + numero + "[style=invis]";
+                cadena += "; \"";
+                cadena += raiz.carnet+"\\n"+raiz.nombre+"\\nAltura: "+raiz.altura;
+                cadena += "\" -> ";
+                cadena += this.retornarValoresArbol(raiz.der, numero)
+                cadena += "{rank=same" + " x" + numero + " -> \"" + raiz.der.carnet +"\\n"+raiz.der.nombre+"\\nAltura"+raiz.der.altura+"\"" +  " [style=invis]}; "
+            }
+        }
+        return cadena;
+    }
 
 
     grafica_arbol(){
         var graphviz = "";
         if(!(this.raiz === null)){
-            graphviz = "digraph arbol{ ";
-            graphviz = graphviz + this.retornarcarnetesArbol(this.raiz, 0);
-            graphviz = graphviz + "}";
+            graphviz = "digraph arbol{\n";
+            graphviz += this.retornarValoresArbol(this.raiz, 0);
+            graphviz = graphviz + "\n}";
         }else{
             graphviz = "No hay carnetes en el arbol";
         }
@@ -224,4 +306,5 @@ export default class Arbol_avl{
         this.raiz = null;
     }
 
+    
 }

@@ -20,20 +20,29 @@ a{
 }
 
 
-#contenedor{
-    margin-left: 10vh;
-    width: 1200px;
-    
-}
 
 /* CONTENEDOR DE BOTONES */
+
 #btns{
     margin-top: 100px;
-    border-radius: 10px;
+    border: 5px dashed #ddd;
 }
 
-#btn_alumno{
-    margin-inline: 50px;
+#btn_PostO{
+    margin-inline: 13.5vh;
+    border-radius: 15px;
+}
+
+
+#btn_InO{
+    margin-inline: 13.5vh;
+    border-radius: 15px;
+}
+
+
+#btn_PreO{
+    margin-inline: 13.5vh;
+    border-radius: 15px;
 }
 
 #tabla{

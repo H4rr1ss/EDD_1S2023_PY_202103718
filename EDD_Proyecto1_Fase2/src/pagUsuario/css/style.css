@@ -1,0 +1,50 @@
+/* CONTENEDOR BASE*/
+#contenedor{
+    height: 90%;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+/* COLUMNA IZQUIERDA */
+#fila{
+    width: 95%;
+}
+
+#inicio{
+    border: 3px ridge #5256ad;
+}
+
+#inicio button{
+    background-color: #5256ad;
+    border-color: #5256ad;
+}
+
+/* COLUMNA DERECHA */
+#buscador{
+    height: 15%;
+}
+
+
+#documentos{
+    height: 73%;
+    border: 2px outset #6b8e23;
+}
+
+#reportes{
+    height: 12%;
+}
+
+#reportes #btn1{
+    background-color: #6b8e23;
+    border-color: #6b8e23;
+}
+
+#reportes #btn2{
+    background-color: #5256ad;
+    border-color: #5256ad;
+}
+
+#reportes #btn3{
+    background-color: #6b8e23;
+    border-color: #6b8e23;
+}

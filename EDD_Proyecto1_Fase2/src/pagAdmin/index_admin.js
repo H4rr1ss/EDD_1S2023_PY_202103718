@@ -51,7 +51,6 @@ function onReaderLoad(event){
 
     console.log("---- Datos ingresados ----")
     for(var i = 0; i<obj.alumnos.length; i++){
-        //console.log(obj.alumnos[i].nombre, obj.alumnos[i].carnet, obj.alumnos[i].password);
         DB.addEstudiante(obj.alumnos[i].nombre, obj.alumnos[i].carnet, obj.alumnos[i].password);
     }
 

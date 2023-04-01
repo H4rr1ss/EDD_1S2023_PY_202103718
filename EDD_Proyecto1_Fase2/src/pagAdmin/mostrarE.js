@@ -1,12 +1,44 @@
 import Arbol_avl from "./estudiante/arbolAVL.js"
 
-/* EXTRACCION DE INFORMACION PARA TABLA */
-var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
-var StructEstudiante = new  Arbol_avl();
-StructEstudiante.raiz = ObjEstudiantes.raiz;
+/* LLAMADO DE BOTONES */
+const btn_POST = document.getElementById("btn_PostO")
+const btn_IN = document.getElementById("btn_InO")
+const btn_PRE = document.getElementById("btn_PreO")
 
-const tablaBody = document.getElementById("tableBody_users");
-tablaBody.innerHTML = StructEstudiante.recorridoPostOrden(ObjEstudiantes.raiz);
+/* EXTRACCION DE INFORMACION PARA TABLA  [POR DEFECTO IN-ORDEN]*/
+TablaInOrden()
 
-var contador = 0
-console.log("\n\nINFO MOVIDA:\n"+ StructEstudiante.recorridoPostOrden(ObjEstudiantes.raiz, contador))
+/* BOTON DE RECORRIDO POSTORDEN */
+btn_POST.addEventListener("click", TablaPostOrden, true)
+
+function TablaPostOrden(){
+    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var StructPOST = new  Arbol_avl();
+    StructPOST.raiz = ObjEstudiantes.raiz;
+
+    const tablaBody = document.getElementById("tableBody_users");
+    tablaBody.innerHTML = StructPOST.recorridoPostOrden(ObjEstudiantes.raiz);
+}
+
+/* BOTON DE RECORRIDO PREORDEN */
+btn_IN.addEventListener("click", TablaInOrden, true)
+
+function TablaInOrden(){
+    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var StructIN = new  Arbol_avl();
+    StructIN.raiz = ObjEstudiantes.raiz;
+
+    const tablaBody = document.getElementById("tableBody_users");
+    tablaBody.innerHTML = StructIN.recorridoInorden(ObjEstudiantes.raiz);
+}
+/* BOTON DE RECORRIDO INORDEN */
+btn_PRE.addEventListener("click", TablaPreOrden, true)
+
+function TablaPreOrden(){
+    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var StructPRE = new  Arbol_avl();
+    StructPRE.raiz = ObjEstudiantes.raiz;
+
+    const tablaBody = document.getElementById("tableBody_users");
+    tablaBody.innerHTML = StructPRE.recorridoPreorden(ObjEstudiantes.raiz);
+}
