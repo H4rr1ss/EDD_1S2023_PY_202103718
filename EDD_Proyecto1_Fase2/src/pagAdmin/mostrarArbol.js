@@ -1,6 +1,7 @@
 import Arbol_avl from "./estudiante/arbolAVL.js"
+import CircularJSON from "../circular-json.js";
 
-var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
 var struct = new  Arbol_avl();
 struct.raiz = ObjEstudiantes.raiz;
 

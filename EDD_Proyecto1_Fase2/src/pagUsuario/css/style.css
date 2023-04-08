@@ -48,3 +48,42 @@
     background-color: #6b8e23;
     border-color: #6b8e23;
 }
+
+#reportes #btn4{
+    background-color: #5256ad;
+    border-color: #5256ad;
+}
+
+
+
+
+
+#contenedor_image{
+    width: 95%;
+    height: 85%;
+    overflow: auto;
+    margin: auto; 
+    position: absolute;
+    top:0; left: 0; bottom: 0; right: 0;
+}
+
+#report_carpetas{
+    height: 100%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+#report_archivos{
+    height: 100%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+#tabla{
+    width: 100%;
+    text-align: center;
+}

@@ -1,4 +1,5 @@
 import Arbol_avl from "./estudiante/arbolAVL.js"
+import CircularJSON from "../circular-json.js"
 
 /* LLAMADO DE BOTONES */
 const btn_POST = document.getElementById("btn_PostO")
@@ -12,7 +13,7 @@ TablaInOrden()
 btn_POST.addEventListener("click", TablaPostOrden, true)
 
 function TablaPostOrden(){
-    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
     var StructPOST = new  Arbol_avl();
     StructPOST.raiz = ObjEstudiantes.raiz;
 
@@ -24,7 +25,7 @@ function TablaPostOrden(){
 btn_IN.addEventListener("click", TablaInOrden, true)
 
 function TablaInOrden(){
-    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
     var StructIN = new  Arbol_avl();
     StructIN.raiz = ObjEstudiantes.raiz;
 
@@ -35,7 +36,7 @@ function TablaInOrden(){
 btn_PRE.addEventListener("click", TablaPreOrden, true)
 
 function TablaPreOrden(){
-    var ObjEstudiantes = JSON.parse(localStorage.getItem("structEstudiantes"));
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
     var StructPRE = new  Arbol_avl();
     StructPRE.raiz = ObjEstudiantes.raiz;
 

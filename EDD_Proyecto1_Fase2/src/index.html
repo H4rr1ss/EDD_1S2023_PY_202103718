@@ -51,23 +51,11 @@
                         </div>
                         <br><br>
                         <div class="d-grid">
-                            <button type = "submit" class = "btn btn-primary bg-black" onclick="ingresar()">Iniciar Sesión</button>
+                            <button type = "submit" class = "btn btn-primary bg-black" id="iniciar">Iniciar Sesión</button>
                         </div>
                         <br>
 
-                        <script>
-                            function ingresar() {
-                                var username = document.getElementById("usuario").value;
-                                var userpass = document.getElementById("contra").value;
-
-                                if(username == "admin" && userpass == "admin"){
-                                    location.href = "pagAdmin/admin.html";
-                                    alert("Bienvenido");
-                                }else{
-                                    alert("Usuario y/o contraseña invalidos");
-                                }
-                            }
-                        </script>
+                        <script src="./login.js" type="module"></script>
                         
                     </form>
                 </div>

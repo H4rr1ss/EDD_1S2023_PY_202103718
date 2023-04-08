@@ -1,13 +1,37 @@
-function ingresar() {
+import Arbol_avl from "./pagAdmin/estudiante/arbolAVL.js";
+import CircularJSON from "./circular-json.js";
+
+
+const inicio = document.getElementById("iniciar");
+
+inicio.addEventListener("click", ingresar, true)
+
+function verificarUser(usuario, contra){
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
+    var struct = new Arbol_avl();
+    struct.raiz = ObjEstudiantes.raiz;
+
+    if(struct.busquedaNodo(ObjEstudiantes.raiz, usuario, contra) != ""){
+        return true
+    }
+
+    return false
+}
+
+
+function ingresar(){
     var username = document.getElementById("usuario").value;
     var userpass = document.getElementById("contra").value;
 
-
     if(username == "admin" && userpass == "admin"){
-        alert("Bienvenido");
         location.href = "pagAdmin/admin.html";
-        alert("Bienvenido2.0");
+        alert("Bienvenido");
+
+    }else if(verificarUser(username, userpass)){
+        location.href = "pagUsuario/usuario.html";
+        alert("Usuario y contraseña correcto!");
     }else{
         alert("Usuario y/o contraseña invalidos");
     }
+
 }

@@ -1,8 +1,12 @@
+import ArbolNArio from "../../pagUsuario/ArbolCarpetas/arbolN.js";
+import CircularJSON from "../../circular-json.js";
+
 class Estudiante{
     constructor(carnet){
         this.nombre = "";
         this.carnet = carnet;
         this.password = "";
+        this.archivos = new ArbolNArio();
 
         this.izq = null;
         this.der = null;
@@ -133,6 +137,117 @@ export default class Arbol_avl{
         return this.raiz
     }
 
+    addArbolN(raiz, carnet, ruta, carpeta){
+        var resp = ""
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                resp += this.addArbolN(raiz.izq, carnet, ruta, carpeta)
+            }
+
+            if(carnet == raiz.carnet){
+                var arbolN = new ArbolNArio();
+                arbolN.raiz = raiz.archivos.raiz;
+                arbolN.nodo_creados = raiz.archivos.nodo_creados;
+                
+                resp += arbolN.insertarValor(ruta, carpeta);
+                console.log(arbolN.grafica_arbol())
+                console.log(arbolN)
+
+                raiz.archivos.raiz = arbolN.raiz;
+                raiz.archivos.nodo_creados = arbolN.nodo_creados;
+            }
+
+            if(raiz.der !== null){
+                resp += this.addArbolN(raiz.der, carnet, ruta, carpeta)
+            }
+        }
+        return resp
+    }
+
+    addMatrizD(raiz, carnet, texto, carpeta, numero){
+        var resp = ""
+
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                resp += this.addMatrizD(raiz.izq, carnet, texto, carpeta, numero)
+            }
+
+            if(carnet == raiz.carnet){
+                var arbolN = new ArbolNArio();
+                arbolN.raiz = raiz.archivos.raiz;
+                arbolN.nodo_creados = raiz.archivos.nodo_creados;
+
+                resp += arbolN.MatrizEstudiante(carpeta, texto, numero);
+                
+                raiz.archivos.raiz = arbolN.raiz;
+                raiz.archivos.nodo_creados = arbolN.nodo_creados;
+            }
+
+            if(raiz.der !== null){
+                resp += this.addMatrizD(raiz.der, carnet, texto, carpeta, numero)
+            }
+        }
+        return resp
+    }
+
+    eliminarCarpeta(raiz, carnet, objStruct){
+
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                this.eliminarCarpeta(raiz.izq, carnet, objStruct)
+            }
+
+            if(carnet == raiz.carnet){
+                raiz.archivos = objStruct
+            }
+
+            if(raiz.der !== null){
+                this.eliminarCarpeta(raiz.der, carnet, objStruct)
+            }
+        }
+    }
+
+    reporte_carpetas(raiz, carnet){
+        var respuesta = ""
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                respuesta += this.reporte_carpetas(raiz.izq, carnet)
+            }
+
+            if(carnet == raiz.carnet){
+                var arbolN = new ArbolNArio();
+                arbolN.raiz = raiz.archivos.raiz;
+
+                respuesta += arbolN.grafica_arbol();
+            }
+
+            if(raiz.der !== null){
+                respuesta += this.reporte_carpetas(raiz.der, carnet)
+            }
+        }
+        return respuesta
+    }
+
+    returnNodo(raiz, carnet){
+        var respuesta = ""
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                respuesta += this.returnNodo(raiz.izq, carnet)
+            }
+
+            if(carnet == raiz.carnet){
+                var arbolN = new ArbolNArio();
+                arbolN.raiz = raiz.archivos.raiz;
+
+                respuesta += JSON.stringify(CircularJSON.stringify(arbolN))
+            }
+
+            if(raiz.der !== null){
+                respuesta += this.returnNodo(raiz.der, carnet)
+            }
+        }
+        return respuesta
+    }
 
     recorridoPostOrden(raiz){
         var cadena = ""
@@ -240,6 +355,25 @@ export default class Arbol_avl{
         return cadena;
     }
 
+    busquedaNodo(raiz, usuario, contra){
+        var prueba = ""
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                prueba += this.busquedaNodo(raiz.izq, usuario, contra)
+            }
+
+            if(usuario == raiz.carnet && contra == raiz.password){
+                localStorage.setItem("estudiante", raiz.carnet)
+                prueba += "si"
+            }
+
+
+            if(raiz.der !== null){
+                prueba += this.busquedaNodo(raiz.der, usuario, contra)
+            }
+        }
+        return prueba
+    }
 
     grafica_arbol(){
         var graphviz = "";
