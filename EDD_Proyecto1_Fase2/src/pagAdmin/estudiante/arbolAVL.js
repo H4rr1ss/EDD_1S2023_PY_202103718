@@ -149,7 +149,7 @@ export default class Arbol_avl{
                 arbolN.raiz = raiz.archivos.raiz;
                 arbolN.nodo_creados = raiz.archivos.nodo_creados;
                 
-                resp += arbolN.insertarValor(ruta, carpeta);
+                resp += arbolN.insertarValor(ruta, carpeta, arbolN.raiz.copia);
                 console.log(arbolN.grafica_arbol())
                 console.log(arbolN)
 

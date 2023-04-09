@@ -8,6 +8,7 @@ class nodoArbol{
         this.filesCarpeta = new Matriz();
         this.primero = null;
         this.id = id;
+        this.copia = 1
     }
 }
 
@@ -120,7 +121,6 @@ export default class ArbolNArio{
             if (this.raiz.primero.valor === directoryList[1]) {
                 this.raiz.primero = this.raiz.primero.siguiente;
             } else {
-                console.log("sdfghfd")
                 let aux = this.raiz.primero;
                 while (aux.siguiente !== null) {
                     console.log(aux.siguiente.valor +" == "+directoryList[1])
@@ -272,7 +272,7 @@ export default class ArbolNArio{
      * 5 - No existe ninguna carpeta en la raiz
      * 
      */
-    insertarValor(ruta, carpeta_nueva){
+    insertarValor(ruta, carpeta_nueva, numero){
         var respuesta = ""
         let lista_carpeta = ruta.split('/')
         console.log("insertar carpetas: "+carpeta_nueva)
@@ -280,18 +280,16 @@ export default class ArbolNArio{
         let existe_carpeta = this.BuscarCarpeta(carpeta_nueva, lista_carpeta)
         switch(existe_carpeta){
             case 1:
-                console.log("La carpeta ya existe(cambiar esto)")
-                respuesta = "La carpeta ya existe(cambiar esto)."
+                let CarpetaCopia = "("+(numero++)+")"+carpeta_nueva
+                this.insertarHijos(CarpetaCopia, lista_carpeta)
                 break;
             case 2:
                 this.insertarHijos(carpeta_nueva, lista_carpeta)
                 break;
             case 3:
-                console.log("La ruta actual no existe")
                 respuesta = "La ruta actual no existe."
                 break;
             case 4:
-                console.log("La ruta actual no es valida")
                 respuesta = "La ruta actual no es valida."
                 break;
             case 5:
@@ -377,7 +375,6 @@ export default class ArbolNArio{
     MatrizEstudiante(carpeta, texto, numero){
         var nodo = 1
         var nodo_padre = 0
-        console.log(this.raiz)
         return this.addMatrizEstudiante(this.raiz, nodo, nodo_padre, carpeta, texto, numero)
     }
 

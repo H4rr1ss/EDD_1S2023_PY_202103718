@@ -12,6 +12,7 @@ export function agregarCarpeta_user(carnet, ruta, carpeta){
     var struct = new  Arbol_avl();
     struct.raiz = ObjEstudiantes.raiz;
 
+    console.log(struct)
     var respuesta = struct.addArbolN(struct.raiz, carnet, ruta, carpeta);
     var retornoResultado = "";
 
