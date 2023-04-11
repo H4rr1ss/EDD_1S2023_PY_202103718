@@ -370,6 +370,30 @@ export default class ArbolNArio{
         return cadena
     }
 
+    permisosDeCarpeta(raiz, nodo, nodo_padre, carpeta, matriz){
+        //RAIZ.PRIMERO, NODO = 1, NODO_PADRE = 0, CARPETA
+        let aux = raiz
+        let nodo_padre_aumento = nodo_padre
+        if(aux !== null){
+            while(aux){
+
+                if(aux.valor == carpeta){
+                    var objMatriz = CircularJSON.parse(JSON.parse(matriz))
+                    aux.filesCarpeta = objMatriz
+                }                
+                aux = aux.siguiente
+            }
+
+            aux = raiz
+            
+            while(aux){
+                nodo_padre_aumento++
+               this.permisosDeCarpeta(aux.primero, this.nodo_creados, nodo_padre_aumento, carpeta, matriz)
+                aux = aux.siguiente
+            }
+        }
+    }
+
 
 
     MatrizEstudiante(carpeta, texto, numero){

@@ -58,10 +58,55 @@ export function agregarMatrizD(texto, rutaUnida, numero){// texto => texto.txt |
         console.log("RESPUESTA DE MATRIZ:\n"+respuest+"\n");
         localStorage.setItem("structEstudiantes", JSON.stringify(CircularJSON.stringify(struct)));
         alert("Archivo cargado correctamente!")
-        return
+        return true
+    }
+    
+    alert("Revise la ruta por favor!")
+    return false
+}
+
+/* 
+        --------------- PERMISOS PARA EL USUARIO ---------------
+*/
+export function permisos(textoInput, rutaUnida){
+    let arreglo = textoInput.split("-")
+    var carnet = localStorage.getItem("estudiante")
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
+    var ruta = rutaUnida.split("/")
+    var carpeta
+
+    if(rutaUnida == "/"){
+        carpeta = "/"
+
+    }else{carpeta = ruta[ruta.length - 1]}
+
+    var struct = new  Arbol_avl();
+    struct.raiz = ObjEstudiantes.raiz;
+    var jsonRAIZ = struct.returnNodo(struct.raiz, carnet);
+    var raizNARIO = CircularJSON.parse(JSON.parse(jsonRAIZ)).raiz;
+
+    var structN = new ArbolNArio();
+    structN.raiz = raizNARIO
+    structN.nodo_creados = CircularJSON.parse(JSON.parse(jsonRAIZ)).nodo_creados
+    var nodoMatriz = structN.BuscarCarpetaV2(ruta)
+
+    if (nodoMatriz !== null){
+        
+        // AGREGAR EL PERMISO Y AGREGAR LA CARPETA AL OTRO USUARIO
+        var matriz = new Matriz()
+        matriz.principal = nodoMatriz.filesCarpeta.principal
+        matriz.coordenadaX = nodoMatriz.filesCarpeta.coordenadaX
+        matriz.coordenadaY = nodoMatriz.filesCarpeta.coordenadaY
+        matriz.colocarPermiso(arreglo[0], arreglo[1], arreglo[2])
+        console.log(matriz.reporte())
+        
+        structN.permisosDeCarpeta(structN.raiz, 1, 0, carpeta, JSON.stringify(CircularJSON.stringify(matriz)))
+        // ENCONTRAR AL ESTUDIANTE EL CUAL MODIFICAR LA CARPETA
+        struct.permisosUser(struct.raiz, carnet, structN)
+
+        localStorage.setItem("structEstudiantes", JSON.stringify(CircularJSON.stringify(struct)))
     }
 
-    alert("Revise la ruta por favor!")
 }
 
 /* 
@@ -143,8 +188,9 @@ export function eliminarCarpeta(lista_carpeta){
         struct.eliminarCarpeta(struct.raiz, carnet, structN)
         localStorage.setItem("structEstudiantes", JSON.stringify(CircularJSON.stringify(struct)))
         alert("Carpeta eliminada con exito!")
-        return
+        return true
     }
 
     console.log("Revise la ruta por favor!")
+    return false
 }

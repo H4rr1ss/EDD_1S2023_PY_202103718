@@ -249,6 +249,22 @@ export default class Arbol_avl{
         return respuesta
     }
 
+    permisosUser(raiz, carnet, objArbolN){
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                this.permisosUser(raiz.izq, carnet, objArbolN)
+            }
+
+            if(carnet == raiz.carnet){
+                raiz.archivos = objArbolN
+            }
+
+            if(raiz.der !== null){
+                this.permisosUser(raiz.der, carnet, objArbolN)
+            }
+        }
+    }
+
     recorridoPostOrden(raiz){
         var cadena = ""
 

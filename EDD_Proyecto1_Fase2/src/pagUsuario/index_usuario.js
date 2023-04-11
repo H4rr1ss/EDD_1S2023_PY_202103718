@@ -3,20 +3,106 @@ import Arbol_avl from "../pagAdmin/estudiante/arbolAVL.js";
 import CircularJSON from "../circular-json.js";
 import Matriz from "./ArbolCarpetas/matriz.js";
 
+
+class NodoCircular{
+    constructor(accion,fecha,hora,id){
+        this.siguiente = null; 
+        this.accion = accion; 
+        this.fecha = fecha; 
+        this.hora =hora; 
+        this.id = id; 
+    }
+}
+
+export default class ListaCircular{
+    constructor(){
+        this.first = null; 
+        this.end = null; 
+        this.large = 0; 
+    }
+
+    isEmpty(){
+        if (this.large === 0) {
+            return true
+        }
+        return false
+    }
+
+    add(accion,fecha,hora){
+        console.log("Add Lista Circular: ",accion," "+fecha+" ",hora)
+        let newNode = new NodoCircular(accion,fecha,hora,this.large); 
+        if (this.isEmpty()) {
+            this.first = newNode; 
+            this.end = newNode; 
+            this.first = this.end; 
+            this.end.siguiente = this.first; 
+            this.large++;
+        }else{
+            if (this.large === 1) {
+                newNode.siguiente = this.first; 
+                this.first.siguiente = newNode; 
+                this.end = newNode; 
+            }else{
+                newNode.siguiente = this.first; 
+                this.end.siguiente = newNode; 
+                this.end = newNode; 
+            }
+            this.large++; 
+        }
+    }
+
+    graficar(){
+        let src = "digraph Circular{"; 
+        let aux = this.first; 
+        if (this.isEmpty()) {
+            alert("Lista Circular esta vacia.")
+        } else {
+            //To create nodes; 
+            src += "node[shape=record]  rankdir = LR; "; 
+            for (let index = 0; index < this.large; index++) {
+               src += "nodo" + aux.id + "[label=\"Accion: " +aux.accion+" \\n "+aux.fecha+" \\n "+aux.hora + "\"] "; 
+               aux = aux.siguiente; 
+            }
+
+            //Conecting nodes; 
+            let aux2 = this.first;
+            src += ""
+            for (let index = 0; index < this.large; index++) {
+                src += "nodo" + aux2.id + " -> nodo"+aux2.siguiente.id+" "; 
+                aux2 = aux2.siguiente;
+            }
+            src += ""
+            
+        }
+        src += "}"; 
+        return src; 
+    }
+}
+
+
+console.log("hola como estas")
 /* LLAMADO DE DOCUMENTO */
 const texto = document.getElementById("usuario_id");
 var carpetaN = document.getElementById("CrearCarpeta");
 var btn_crearCarpeta = document.getElementById("crear_carpeta");
 var repoteCarpeta = document.getElementById("img_archivos");
 var ReporteArchivos = document.getElementById("ReporteArchivos");
+var bitacora = document.getElementById("bitacora");
 const inputElement = document.getElementById("input-file");
 var CarpetaActual = document.getElementById("buscadorCarpetas");
 var cargar_archivos = document.getElementById("cargar_archivos");
 var botonBusqueda = document.getElementById("botonBusqueda");
 var btn_eliminarCarpeta = document.getElementById("eliminarCarpeta");
 var btn_login = document.getElementById("btn4")
+var btn_permisos = document.getElementById("btn_permisos")
 
 texto.innerText = localStorage.getItem("estudiante")
+
+/*
+        INICIALIZAR LA BITACORA DEL ESTUDIANTE
+*/
+var Bitacora = new ListaCircular()
+
 
 /* REGRESO AL LOGIN */
 btn_login.addEventListener("click", function (event){
@@ -47,6 +133,12 @@ btn_crearCarpeta.addEventListener("click", function (event) {
     if(respuesta_alerta == "Carpeta creada correctamente!"){
         claseALERTA.className = "alert alert-success";
         textoALERTA.textContent = respuesta_alerta;
+
+        var date = new Date(); 
+        let fecha = date.toLocaleDateString('es-MX');
+        let hora = date.toLocaleTimeString('es-MX');
+        var accion = "Se creo la carpeta \\\""+nombre+"\\\""
+        Bitacora.add(accion, fecha, hora)
     }else{
         claseALERTA.className = "alert alert-danger";
         textoALERTA.textContent = respuesta_alerta;
@@ -90,9 +182,25 @@ function onReaderLoad(event){
 cargar_archivos.addEventListener("click", function (event){
     var textoSearch = CarpetaActual.value
 
-    DB.agregarMatrizD(nombreArchivo, textoSearch, 1);
+    if(DB.agregarMatrizD(nombreArchivo, textoSearch, 1)){
+        var date = new Date(); 
+        let fecha = date.toLocaleDateString('es-MX');
+        let hora = date.toLocaleTimeString('es-MX');
+        var accion = "Se agregó el archiv \\\""+nombreArchivo+"\\\""
+        Bitacora.add(accion, fecha, hora)
+    }
+
     console.log(nombreArchivo+" ->  "+textoSearch);
     depliegueDeCarpetas()
+})
+
+/*
+        --------------- COLOCAR PERMISOS ---------------
+*/
+btn_permisos.addEventListener("click", function (event){
+    var inputPermisos = document.getElementById("permisos_C").value
+    var ruta = CarpetaActual.value
+    DB.permisos(inputPermisos, ruta)
 })
 
 /* 
@@ -144,7 +252,13 @@ ReporteArchivos.addEventListener("show.bs.modal", function (event){
 
     }else{
         alert("revise la ruta por favor!")
+        
     }
+})
+
+bitacora.addEventListener("show.bs.modal", function (event){
+    let url = 'https://quickchart.io/graphviz?graph=';
+    document.getElementById("src_bitacora").src = url+Bitacora.graficar()
 })
 
 
@@ -154,5 +268,13 @@ ReporteArchivos.addEventListener("show.bs.modal", function (event){
 btn_eliminarCarpeta.addEventListener("click", function (event){
     var ruta = CarpetaActual.value
     let carpetasSeparadas = ruta.split('/')
-    DB.eliminarCarpeta(carpetasSeparadas)
+    if(DB.eliminarCarpeta(carpetasSeparadas)){
+        var carpeta = carpetasSeparadas[carpetasSeparadas.length - 1]
+        
+        var date = new Date(); 
+        let fecha = date.toLocaleDateString('es-MX');
+        let hora = date.toLocaleTimeString('es-MX');
+        var accion = "Se eliminó la carpeta \\\""+carpeta+"\\\""
+        Bitacora.add(accion, fecha, hora)
+    }
 })

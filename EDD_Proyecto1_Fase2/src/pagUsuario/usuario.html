@@ -94,6 +94,7 @@
                             <button type="button" class="mt-2 btn btn-primary" id="btn2" data-bs-toggle="modal" data-bs-target="#SubirArchivos">Subir/permisos archivos</button>
                             <button type="button" class="mt-2 btn btn-primary" id="btn4" href="/EDD_Proyecto1_Fase2/src/index.html">Regresar Login</button>
                             <button type="button" class="mt-2 btn btn-primary" id="btn3" data-bs-toggle="modal" data-bs-target="#ReporteArchivos">Reporte Archivos</button>
+                            <button type="button" class="mt-2 btn btn-primary" id="btn5" data-bs-toggle="modal" data-bs-target="#bitacora">Bitacora</button>
                         
 
 
@@ -113,6 +114,33 @@
                                         <div class="modal-body">
                                             <div class="container" id="contenedor_image">
                                                 <img src="" id = "report_carpetas" alt="arbol de carpetas" width="100%">
+                                            </div>
+                                        </div>
+
+                                        <!-- BOTONES DE ACEPTACION O NEGACION-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- #region  BITACORA-->
+                            <div class="modal fade bg-black modal-fullscreen" id="bitacora" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-fullscreen">
+                                    <div class="modal-content">
+                            
+                                        <!-- TITULO DEL MENSAJE -->
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Bitacora del estudiante</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                            
+                                        <!-- CONTENIDO -->
+                                        <div class="modal-body">
+                                            <div class="container" id="contenedor_image">
+                                                <img src="" id = "src_bitacora" alt="bitacora" width="100%">
                                             </div>
                                         </div>
 
@@ -171,7 +199,7 @@
                                             <div class="mb-3 mt-2">
                                                 <label for="permisos_C" class="col-form-label">Permisos de carpetas</label>
                                                 <input type="text" class="form-control" id="permisos_C" placeholder="Ej: Archivo.png-carnet-TipoDePermiso">
-                                                <button type="button" class="btn mt-2" style="background-color: #5256ad; color: white;">Asignar Permisos</button>
+                                                <button type="button" class="btn mt-2" id = "btn_permisos" style="background-color: #5256ad; color: white;">Asignar Permisos</button>
                                             </div>
                                         </div>
                             
