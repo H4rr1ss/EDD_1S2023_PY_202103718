@@ -9,11 +9,11 @@ inicio.addEventListener("click", function (event){
     var userpass = document.getElementById("contra").value;
 
     if(username == "admin" && userpass == "admin"){
-        location.href = "pagAdmin/admin.html";
+        location.href = "./pagAdmin/admin.html";
         alert("Bienvenido");
 
     }else if(verificarUser(username, userpass)){
-        location.href = "pagUsuario/usuario.html";
+        location.href = "./pagUsuario/usuario.html";
         alert("Usuario y contraseña correcto!");
     }else{
         alert("Usuario y/o contraseña invalidos");
