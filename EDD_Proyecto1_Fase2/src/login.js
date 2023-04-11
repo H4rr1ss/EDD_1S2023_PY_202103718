@@ -2,24 +2,9 @@ import Arbol_avl from "./pagAdmin/estudiante/arbolAVL.js";
 import CircularJSON from "./circular-json.js";
 
 
-const inicio = document.getElementById("iniciar");
+var inicio = document.getElementById("iniciar");
 
-inicio.addEventListener("click", ingresar, true)
-
-function verificarUser(usuario, contra){
-    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
-    var struct = new Arbol_avl();
-    struct.raiz = ObjEstudiantes.raiz;
-
-    if(struct.busquedaNodo(ObjEstudiantes.raiz, usuario, contra) != ""){
-        return true
-    }
-
-    return false
-}
-
-
-function ingresar(){
+inicio.addEventListener("click", function (event){
     var username = document.getElementById("usuario").value;
     var userpass = document.getElementById("contra").value;
 
@@ -33,5 +18,16 @@ function ingresar(){
     }else{
         alert("Usuario y/o contraseña invalidos");
     }
+})
 
+function verificarUser(usuario, contra){
+    var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
+    var struct = new Arbol_avl();
+    struct.raiz = ObjEstudiantes.raiz;
+
+    if(struct.busquedaNodo(ObjEstudiantes.raiz, usuario, contra) != ""){
+        return true
+    }
+
+    return false
 }
