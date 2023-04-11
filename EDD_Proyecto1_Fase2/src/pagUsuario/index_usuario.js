@@ -80,7 +80,6 @@ export default class ListaCircular{
 }
 
 
-console.log("hola como estas")
 /* LLAMADO DE DOCUMENTO */
 const texto = document.getElementById("usuario_id");
 var carpetaN = document.getElementById("CrearCarpeta");
