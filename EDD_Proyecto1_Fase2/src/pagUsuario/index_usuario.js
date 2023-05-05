@@ -196,9 +196,11 @@ cargar_archivos.addEventListener("click", function (event){
 /*
         --------------- COLOCAR PERMISOS ---------------
 */
+
 btn_permisos.addEventListener("click", function (event){
     var inputPermisos = document.getElementById("permisos_C").value
     var ruta = CarpetaActual.value
+    console.log(inputPermisos)
     DB.permisos(inputPermisos, ruta)
 })
 

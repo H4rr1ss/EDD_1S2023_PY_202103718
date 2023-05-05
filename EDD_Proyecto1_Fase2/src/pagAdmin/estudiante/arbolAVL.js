@@ -456,5 +456,18 @@ export default class Arbol_avl{
         this.raiz = null;
     }
 
+    addStructHash(raiz, hash){
+        if(raiz !== null){
+            if(raiz.izq !== null){
+                this.addStructHash(raiz.izq, hash)
+            }
+
+            hash.insertar(raiz.carnet, raiz.nombre, raiz.password, JSON.stringify(CircularJSON.stringify(raiz.archivos)))
+
+            if(raiz.der !== null){
+                this.addStructHash(raiz.der, hash)
+            }
+        }
+    }
     
 }
