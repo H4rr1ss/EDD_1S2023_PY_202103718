@@ -1,7 +1,9 @@
 import * as DB from "./db.js"
+import * as DB_F3 from "../../../EDD_Proyecto1_Fase3/DB/database.js"
 import Arbol_avl from "../pagAdmin/estudiante/arbolAVL.js";
 import CircularJSON from "../circular-json.js";
 import Matriz from "./ArbolCarpetas/matriz.js";
+import { getHash } from "../../../EDD_Proyecto1_Fase3/mensajeria/herramientas/getHash.js";
 
 
 class NodoCircular{
@@ -263,12 +265,6 @@ ReporteArchivos.addEventListener("show.bs.modal", function (event){
     }
 })
 
-bitacora.addEventListener("show.bs.modal", function (event){
-    let url = 'https://quickchart.io/graphviz?graph=';
-    document.getElementById("src_bitacora").src = url+Bitacora.graficar()
-})
-
-
 /* 
         --------------- ELIMINACIÓN DE CAREPTA ---------------
 */
@@ -284,4 +280,17 @@ btn_eliminarCarpeta.addEventListener("click", function (event){
         var accion = "Se eliminó la carpeta \\\""+carpeta+"\\\""
         Bitacora.add(accion, fecha, hora)
     }
+})
+
+// GRAFICACION DE GRAFO DIRIGIDO
+var graf = document.getElementById("grafo_dirigido")
+
+graf.addEventListener("show.bs.modal", function (event){
+    var hash = getHash()
+    let url = 'https://quickchart.io/graphviz?graph=';
+    let body = DB_F3.buildDirectedGraph(hash)
+    var imagen = document.getElementById("src_grafo_dirigido")
+    imagen.src = (url+body)
+    console.log(body)
+    console.log(url+body)
 })

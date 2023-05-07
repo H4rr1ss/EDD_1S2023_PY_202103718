@@ -342,6 +342,25 @@ export default class ArbolNArio{
         return cadena
     }
 
+    returnData(raiz, nodo, nodo_padre){
+        let cadena = ""
+        let aux = raiz
+        let nodo_padre_aumento = nodo_padre
+        if(aux !== null){
+            while(aux){
+                cadena += "nodo" + aux.id + "[label=\"" + aux.valor  + "\"] "
+                aux = aux.siguiente
+            }
+            aux = raiz
+            while(aux){
+                nodo_padre_aumento++
+                cadena += this.returnData(aux.primero, this.nodo_creados, nodo_padre_aumento)
+                aux = aux.siguiente
+            }
+        }
+        return cadena
+    }
+
     returnNodoCarpeta(raiz, nodo, nodo_padre, carpeta){
         //RAIZ.PRIMERO, NODO = 1, NODO_PADRE = 0, CARPETA
         let cadena = ""
@@ -445,14 +464,31 @@ export default class ArbolNArio{
         return cadena
     }
 
+    toDirectedGraph(directedGraph) {
+        this.returnNext(directedGraph, this.raiz.valor, this.raiz.primero)
+    }
 
-
-
-
-
-
-
-
+    returnNext(directedGraph, parent, root) {
+        let childs = ''
+        let parent_carpet = parent
+        let aux = root
+        while (aux) {
+            childs += aux.valor + ','
+            aux = aux.siguiente
+        }
+        childs = childs.substr(0, childs.length - 1);
+        if (childs !== '') {
+            console.log("Padre: " + parent + " childs: " + childs)
+            directedGraph.insertarValores(parent, childs)
+        }
+        aux = root
+        while (aux) {
+            parent_carpet = parent + aux.valor + "/"
+            parent_carpet = parent_carpet.substr(0, parent_carpet.length - 1);
+            this.returnNext(directedGraph, parent_carpet, aux.primero)
+            aux = aux.siguiente
+        }
+    }
 
     conexionRamas(raiz, padre){
         let cadena = ""

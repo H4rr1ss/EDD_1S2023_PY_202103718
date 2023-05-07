@@ -150,65 +150,6 @@ export default class TablaHash{
     }
 
 
-    genera_tabla() {
-        // Obtener la referencia del elemento body
-        var body = document.getElementsByTagName("body")[0];
-      
-        // Crea un elemento <table> y un elemento <tbody>
-        var divtable = document.createElement("div");
-        var tabla   = document.createElement("table");
-        var tblBody = document.createElement("tbody");
-        var salto_html = document.createElement("br")
-        divtable.className = "container"
-        tabla.className = "table"
-        //carnet
-        var encabezado = document.createElement("tr")
-        var celda_encabezado = document.createElement("td");
-        var encabezado_contenido = document.createTextNode("Carnet")
-        celda_encabezado.appendChild(encabezado_contenido);
-        encabezado.appendChild(celda_encabezado)
-        tblBody.appendChild(encabezado)
-        //Nombre
-        celda_encabezado = document.createElement("td");
-        encabezado_contenido = document.createTextNode("Nombre")
-        celda_encabezado.appendChild(encabezado_contenido);
-        encabezado.appendChild(celda_encabezado)
-        tblBody.appendChild(encabezado)
-        //Password
-        celda_encabezado = document.createElement("td");
-        encabezado_contenido = document.createTextNode("Password")
-        celda_encabezado.appendChild(encabezado_contenido);
-        encabezado.appendChild(celda_encabezado)
-        tblBody.appendChild(encabezado)
-
-        for(var i = 0; i < this.capacidad; i++){
-            if(this.tabla[i] != null){
-                var hilera = document.createElement("tr");
-                var arreglo = new Array(3)
-                arreglo[0] = this.tabla[i].carnet
-                arreglo[1] = this.tabla[i].usuario
-                arreglo[2] = this.tabla[i].password
-                for(var j = 0; j < 3; j++){
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode(arreglo[j]);
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                tblBody.appendChild(hilera);
-            }
-        }
-
-
-        divtable.appendChild(tabla)
-        // posiciona el <tbody> debajo del elemento <table>
-        tabla.appendChild(tblBody);
-        // appends <table> into <body>
-        body.appendChild(salto_html);
-        body.appendChild(divtable);
-        // modifica el atributo "border" de la tabla y lo fija a "2";
-        tabla.setAttribute("border", "2");
-    }
-
     isPrime(numero) {
         if (numero <= 1) {return false}
         if (numero === 2) {return true}

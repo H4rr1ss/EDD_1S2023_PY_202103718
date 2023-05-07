@@ -3,6 +3,7 @@ import CircularJSON from "../circular-json.js";
 import ArbolNArio from "./ArbolCarpetas/arbolN.js";
 import Matriz from "./ArbolCarpetas/matriz.js";
 import ListaSimplePermisosHTML from "../../../EDD_Proyecto1_Fase3/PermisosHTML/listaPermisos.js"
+import { getHash } from "../../../EDD_Proyecto1_Fase3/mensajeria/herramientas/getHash.js"
 
 var destino
 var permiso

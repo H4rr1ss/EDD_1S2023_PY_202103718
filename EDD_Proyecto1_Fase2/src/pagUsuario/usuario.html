@@ -19,6 +19,7 @@
                         <h3 class="p-2 d-flex justify-content-center" id="usuario_id"></h3>
                         <button type="button" class="mt-3 btn btn-primary p-2 d-flex justify-content-center m-3" data-bs-toggle="modal" data-bs-target="#CrearCarpeta">Crear Carpeta</button>
                         <button type="button" class="mt-2 btn btn-primary p-2 d-flex justify-content-center m-3" id="eliminarCarpeta">Eliminar Carpeta</button>
+                        <button type="button" class="mt-2 btn btn-primary p-2 d-flex justify-content-center m-3" id="btn4" href="../index.html">Regresar Login</button>
 
                         <!-- MODELOS -->
                         <div class="modal fade" id="CrearCarpeta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,10 +93,11 @@
                         <div class="col-12 col-lg-12 d-flex justify-content-evenly align-items-center" id="reportes">
                             <button type="button" class="mt-2 btn btn-primary" id="btn1" data-bs-toggle="modal" data-bs-target="#img_archivos">Reporte Carpetas</button>
                             <button type="button" class="mt-2 btn btn-primary" id="btn2" data-bs-toggle="modal" data-bs-target="#SubirArchivos">Subir/permisos archivos</button>
-                            <button type="button" class="mt-2 btn btn-primary" id="btn4" href="../index.html">Regresar Login</button>
+                            
                             <button type="button" class="mt-2 btn btn-primary" id="btn6">Mensajes</button>
+                            <button type="button" class="mt-2 btn btn-primary" id="grafoDiri" data-bs-toggle="modal" data-bs-target="#grafo_dirigido">Grafo Dirigido</button>
                             <button type="button" class="mt-2 btn btn-primary" id="btn3" data-bs-toggle="modal" data-bs-target="#ReporteArchivos">Reporte Archivos</button>
-                            <button type="button" class="mt-2 btn btn-primary" id="btn5" data-bs-toggle="modal" data-bs-target="#bitacora">Bitacora</button>
+                            <button type="button" class="mt-2 btn btn-primary" id="btn5" data-bs-toggle="modal" data-bs-target="#compartidos">Compartidos</button>
                         
 
 
@@ -127,21 +129,21 @@
                                 </div>
                             </div>
 
-                            <!-- #region  BITACORA-->
-                            <div class="modal fade bg-black modal-fullscreen" id="bitacora" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- #region  grafo_dirigido-->
+                            <div class="modal fade bg-black modal-fullscreen" id="grafo_dirigido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-fullscreen">
                                     <div class="modal-content">
                             
                                         <!-- TITULO DEL MENSAJE -->
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Bitacora del estudiante</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Grafo</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                             
                                         <!-- CONTENIDO -->
                                         <div class="modal-body">
                                             <div class="container" id="contenedor_image">
-                                                <img src="" id = "src_bitacora" alt="bitacora" width="100%">
+                                                <img src="" id = "src_grafo_dirigido" alt="grafo_dirigido" width="100%">
                                             </div>
                                         </div>
 
