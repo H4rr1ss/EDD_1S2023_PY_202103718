@@ -20,32 +20,23 @@ export async function insertarHash(avl, hash){
 }
 
 export function buildDirectedGraph(hashTable) {
-    // Recorremos la Hash Table
     for (let i = 0; i < hashTable.capacidad; i++) {
         const node = hashTable.tabla[i]
         
         if(node){
             console.log(JSON.parse(node.archivos))
-            // Exportamos el N-Ary Tree
             const rootNAry = (JSON.parse(node.archivos)).raiz;
             const nodesNAry = (JSON.parse(node.archivos)).nodo_creados;
 
-            // Seteamos el N-Ary Tree
             const newNAry = new ArbolNArio();
             newNAry["raiz"] = rootNAry;
             newNAry["nodo_creados"] = nodesNAry;
-            //console.log(node.user, newNAry);
 
-            // Creamos el grafo dirigido
             const newGraph = new grafoDirigido();
 
-            // Insertamos los nodos del N-Ary Tree en el grafo dirigido
             newNAry.toDirectedGraph(newGraph);
 
             if (newGraph.principal != null) {
-                console.log(newGraph);
-                //newGraph.graphDirectedGraph()
-                console.log(newGraph.grafica());
                 return newGraph.grafica()
             }
         }
