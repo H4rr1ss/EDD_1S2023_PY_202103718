@@ -3,6 +3,7 @@ import TablaHash from "../../../EDD_Proyecto1_Fase3/TablaHash/T_HASH.js";
 import Arbol_avl from "./estudiante/arbolAVL.js"
 import CircularJSON from "../circular-json.js";
 import ListaSimplePermisosHTML from "../../../EDD_Proyecto1_Fase3/PermisosHTML/listaPermisos.js"
+import * as DB_F3 from "../../../EDD_Proyecto1_Fase3/DB/database.js"
 
 /* ---------------- SUBIDA DE ARCHIVOS ---------------- */
 const dropArea = document.querySelector(".drag-area");
@@ -60,28 +61,21 @@ function onReaderLoad(event){
 
 CargaStructsNews.addEventListener("click", function (event){
     var tablaHash = new TablaHash();
-    
+
     var ObjEstudiantes = CircularJSON.parse(JSON.parse(localStorage.getItem("structEstudiantes")));
     var struct_avl = new  Arbol_avl();
     struct_avl.raiz = ObjEstudiantes.raiz;
 
-    struct_avl.addStructHash(struct_avl.raiz, tablaHash)
+    DB_F3.insertarHash(struct_avl, tablaHash);
 
-    // console.log(tablaHash)
-    localStorage.setItem("structHash", JSON.stringify(tablaHash))
     alert("Archivos agregados correctamente");
-
-
-    const tablaBody = document.getElementById("tableBody_users");
-    tablaBody.innerHTML = tablaHash.tablaEstudiantes();
-
 
     var objPermisos = JSON.parse(localStorage.getItem("PermisosHTML"))
     var permisos = new ListaSimplePermisosHTML();
     permisos.raiz = objPermisos.raiz
     permisos.size = objPermisos.size
 
-    console.log(permisos.returnHTMLPermisos())
+    // console.log(permisos.returnHTMLPermisos())
     const tablaBody2 = document.getElementById("tableBody_users2");
     tablaBody2.innerHTML = permisos.returnHTMLPermisos()
     

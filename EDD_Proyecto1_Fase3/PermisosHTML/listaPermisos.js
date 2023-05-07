@@ -49,19 +49,19 @@ export default class ListaSimplePermisosHTML{
     }
 
     returnHTMLPermisos(){
-        var array = this.toArray()
-        var cadena = ""
-
+      var array = this.toArray()
+      var cadena = ""
+      
+      for(var j = 0; j < array.length; j++){
         cadena += "<tr>\n"
-        for(var j = 0; j < array.length; j++){
-            cadena += "\t<td>"+array[j].propietario+"</td>\n"
-            cadena += "\t<td>"+array[j].destino+"</td>\n"
-            cadena += "\t<td>"+array[j].ubicacion+"</td>\n"
-            cadena += "\t<td>"+array[j].archivo+"</td>\n"
-            cadena += "\t<td>"+array[j].permisos+"</td>\n"
-        }
+        cadena += "\t<td>"+array[j].propietario+"</td>\n"
+        cadena += "\t<td>"+array[j].destino+"</td>\n"
+        cadena += "\t<td>"+array[j].ubicacion+"</td>\n"
+        cadena += "\t<td>"+array[j].archivo+"</td>\n"
+        cadena += "\t<td>"+array[j].permisos+"</td>\n"
         cadena += "</tr>\n"
+      }
 
-        return cadena
+      return cadena
     }
 }

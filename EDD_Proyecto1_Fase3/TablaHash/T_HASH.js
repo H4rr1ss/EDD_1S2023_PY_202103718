@@ -1,5 +1,4 @@
 import ArbolNArio from "../../EDD_Proyecto1_Fase2/src/pagUsuario/ArbolCarpetas/arbolN.js";
-import CircularJSON from "../../EDD_Proyecto1_Fase2/src/circular-json.js";
 import Permiso from "../PermisosHTML/objPermisos.js";
 
 class nodoHash{
@@ -96,37 +95,44 @@ export default class TablaHash{
         return nueva_posicion
     }
 
-    busquedaUsuario(carnet){
-        let indice = this.calculoIndice(carnet)
-        if(indice < this.capacidad){
-            try{
-                if(this.tabla[indice] == null){
-                    alert("Bienvenido " + this.tabla[indice].usuario)
-
-                }else if(this.tabla[indice] != null && this.tabla[indice].carnet == carnet){
-                    alert("Bienvenido " + this.tabla[indice].usuario)
-
-                }else{
-                    let contador = 1
-                    indice = this.RecalculoIndice(carnet,contador)
-                    while(this.tabla[indice] != null){
-                        contador++
-                        indice = this.RecalculoIndice(carnet, contador)
-                        if(this.tabla[indice].carnet == carnet){
-                            alert("Bienvenido " + this.tabla[indice].usuario)
-                            return
-                        }
-                    }
-                }
-            }catch(err){
-                console.log("Hubo un error en busqueda")
+    busquedaUsuario(carnet) {
+        let index = this.calculoIndice(carnet);
+        if (index < this.capacidad) {
+          try {
+            let contador = 1;
+            let temp = this.tabla[index];
+            while (temp != null) {
+              if (temp.carnet == String(carnet)) {
+                return temp;
+              } else {
+                index = this.RecalculoIndice(carnet, contador);
+                temp = this.tabla[index];
+                contador++;
+              }
             }
+            return null;
+          } catch (error) {}
         }
+      }
+
+    login(carnet, password) {
+        console.log(password)
+        if (this.busquedaUsuario(carnet)) {
+          let temp = this.busquedaUsuario(carnet);
+          // console.log(`temp.carnet:${temp.carnet} temp.password: ${temp.password} a: ${password} `)
+          if (temp.password == password) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+        return false;
     }
 
     tablaEstudiantes(){
         let cadena = ""
         for(var i = 0; i < this.capacidad; i++){
+
             if(this.tabla[i] != null){
                 var arreglo = new Array(3)
                 arreglo[0] = this.tabla[i].carnet
@@ -143,9 +149,6 @@ export default class TablaHash{
         return cadena
     }
 
-    // Estudiantes(){
-        
-    // }
 
     genera_tabla() {
         // Obtener la referencia del elemento body
